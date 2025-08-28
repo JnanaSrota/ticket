@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Ticket - {{ booking.booking_reference }}</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h1 { color: #2c3e50; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 8px; }
+    th { background: #f4f4f4; }
+  </style>
+</head>
+<body>
+  <h1>Travel Booking Ticket</h1>
+  <p><strong>Reference:</strong> {{ booking.booking_reference }}</p>
+  <p><strong>User:</strong> {{ booking.user.username }}</p>
+  <p><strong>Status:</strong> {{ booking.status }}</p>
+  <p><strong>Travel:</strong> {{ booking.travel_option.company_name }} ({{ booking.travel_option.type }})</p>
+  <p><strong>Route:</strong> {{ booking.travel_option.source }} → {{ booking.travel_option.destination }}</p>
+  <p><strong>Departure:</strong> {{ booking.travel_option.departure_time }}</p>
+  <p><strong>Arrival:</strong> {{ booking.travel_option.arrival_time }}</p>
+  <p><strong>Seats:</strong> {{ booking.number_of_seats }}</p>
+  <p><strong>Total Price:</strong> ₹{{ booking.total_price }}</p>
+
+  <h2>Passengers</h2>
+  <table>
+    <tr><th>Seat</th><th>Name</th></tr>
+    {% for p in booking.passenger_details %}
+      <tr><td>{{ p.seat_number }}</td><td>{{ p.name }}</td></tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
